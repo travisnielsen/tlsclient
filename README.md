@@ -1,23 +1,42 @@
-# Azure Function with Custom Root and Intermediate Certificates
+# Azure Functions with Custom Root and Intermediate Certificates
 
-This sample includes a Function that makes a call to `https://mtlsdemo.nielski.com:8443/`, which uses a TLS certificate issued by a custom certificate chain. It works using a cusotm Dockerfile based on the [Azure Functions Base image](https://hub.docker.com/_/microsoft-azure-functions-base?tab=description). The required root and intermediate CA certificates are imported so that the TLS connection for an outbound call can be established.
+This repo includes sample Functions, one written in .NET and one in Node JS, that make an HTTP call to an external web service hosted at: `https://mtlsdemo.nielski.com:8443/`. This service uses a TLS certificate issued by a custom certificate chain. Each Function App is depoyed via a Dockerfile based on the [Azure Functions Base image](https://hub.docker.com/_/microsoft-azure-functions-base?tab=description). The required root and intermediate CA certificates are imported so that the TLS connection for an outbound call can be established.
 
-> NOTE: This sample currently emits "The remote certificate is invalid according to the validation procedure."
+> NOTE: The .NET version of the Function currently fails with "The remote certificate is invalid according to the validation procedure" despite the certificate import. This is currently being investigated.
 
 ## Prerequisites
 
-This sample requires a recent version of Docker and .Net Core 3.1 installed on a development workstation. Visual Studio Code is recommended.
+In order to test this project locally, this sample requires the following installed and configured:
+1) Docker Desktop
+2) .Net Core 3.1 SDK 
+3) Node 10+
 
-## Build and Run
+Visual Studio Code is the recommended IDE.
 
-From the project root, execute the following command to create the image:
+## Build and Run (.NET Core)
+
+Switch to the `dotnet` directory and execute the following command to create the image:
 
 ```bash
-docker build -t [your_docker_id]/tlsclient:0.0.1 .
+docker build -t [your_docker_id]/tlsdotnet:0.0.1 .
 ```
 
 Next, start the Function container:
 
 ```bash
-docker run -p 8080:80 -it [your_docker_id]/tlsclient:0.0.1
+docker run -p 8080:80 -it [your_docker_id]/tlsdotnet:0.0.1
+```
+
+## Build and Run (Node JS)
+
+Switch to the `node` directory and execute the following command to create the image:
+
+```bash
+docker build -t [your_docker_id]/tlsnode:0.0.1 .
+```
+
+Next, start the Function container:
+
+```bash
+docker run -p 8080:80 -it [your_docker_id]/tlsnode:0.0.1
 ```

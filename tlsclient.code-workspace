@@ -1,0 +1,16 @@
+
+{
+	"folders": [
+		{
+			"path": "dotnet",
+			"name": "dotnet"
+		},
+		{
+			"path": "node",
+			"name": "node"
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen"
+	}
+}
