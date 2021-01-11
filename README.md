@@ -2,7 +2,6 @@
 
 This repo includes sample Functions, one written in .NET and one in Node JS, that make an HTTP call to an external web service hosted at: `https://mtlsdemo.nielski.com:8443/`. This service uses a TLS certificate issued by a custom certificate chain. Each Function App is depoyed via a Dockerfile based on the [Azure Functions Base image](https://hub.docker.com/_/microsoft-azure-functions-base?tab=description). The required root and intermediate CA certificates are imported so that the TLS connection for an outbound call can be established.
 
-> NOTE: The .NET version of the Function currently fails with "The remote certificate is invalid according to the validation procedure" despite the certificate import. This is currently being investigated.
 
 ## Prerequisites
 
